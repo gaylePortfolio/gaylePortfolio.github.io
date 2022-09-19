@@ -1,0 +1,202 @@
+WEBVTT
+
+00:00.400 --> 00:06.920
+In this video, we will demonstrate how to identify accessibility issues for a sample webpage. 
+
+00:06.970 --> 00:12.580
+First, let's demonstrate how to manually find the accessibility issues documented on the practice triage sheet
+
+00:12.590 --> 00:13.260
+(answer key).
+
+00:14.640 --> 00:17.980
+Issue 1: Lack of heading 1 for Explorers needed
+
+00:18.940 --> 00:27.400
+Visually, this content appears to be a heading. However, by inspecting the HTML we see the content is actually a paragraph element styled
+
+00:27.400 --> 00:35.570
+like a heading 1. This makes it more difficult for blind screen reader users who rely on these headings to navigate and fails the WCAG
+
+00:35.580 --> 00:43.740
+criterion 2.4.10 Section Headings. The content should be coded with semantic h1 element tags
+
+00:43.750 --> 00:50.250
+so that it is recognized as a heading by assistive technology like screen readers. Similar to Issue 1,
+
+00:50.400 --> 00:58.470
+Issue 2: Lack of heading 2 for contact details - refers to the "Sign up for a one way mission to Mars" content in
+
+00:58.470 --> 01:06.690
+the middle of the page. By inspecting the associated HTML, we see the content is a paragraph element styled like a heading 2.
+
+01:07.340 --> 01:12.510
+This content should instead be coded with semantic h2 element tags. Next,
+
+01:12.520 --> 01:20.220
+let's look at the "Your contact details" section of the page. The asterisk * symbols next to the name and phone number
+
+01:20.220 --> 01:25.370
+fields seem to indicate the fields are required. If we leave the fields blank and submit the form,
+
+01:25.620 --> 01:33.790
+we see that we indeed get an error. This makes it more difficult for blind screen reader users who may not get any readout for the asterisk symbols
+
+01:33.980 --> 01:39.960
+and other types of symbols, failing WCAG criterion 1.3.1 Info and Relationships.
+
+01:40.540 --> 01:47.760
+Now we identify Issue 3: Required form fields. Having an asterisk is not enough to communicate that a field is required.
+
+01:47.940 --> 01:56.080
+This really could be considered a general bug! Inspecting the HTML we see the input tag should have a required attribute for the associated input tags.
+
+01:56.210 --> 02:01.860
+Issue 4: Lack of association between error and form field. The ambiguous error message,
+
+02:01.940 --> 02:08.800
+"There is a problem processing the form." is not helpful - especially for those using assistive technology. Blind screen reader
+
+02:08.800 --> 02:17.960
+users may not understand from this text that there was an error on the form! This fails WCAG criterion 3.3.1 Error Identification.
+
+02:18.800 --> 02:24.950
+The error message text should instead be more specific and associated with each required input field.
+
+02:25.340 --> 02:31.250
+For example, "Error - First name is required." next to the first name field would be a better choice.
+
+02:31.640 --> 02:35.490
+Issue 5: Use of color as the sole means of indicating meaning.
+
+02:36.640 --> 02:42.550
+This is always problematic, especially for errors. For users with visual impairments like color blindness,
+
+02:42.560 --> 02:50.760
+distinguishing error messages based on red or green color alone blocks these users from perceiving the errors, failing
+
+02:50.760 --> 02:58.600
+WCAG 1.4.1 Use of Color. Therefore, adding meaningful text in addition to the usage of color is highly recommended.
+
+02:58.940 --> 03:02.990
+For example, within Workday you'll often see accessible error messages like this.
+
+03:04.040 --> 03:09.300
+Issue 6: Lack of status announcement for error - is a little more difficult to find manually.
+
+03:09.670 --> 03:14.670
+For example on a Mac, you can use the voiceover built in feature to hear what announcements are made.
+
+03:15.090 --> 03:23.260
+If we clear the page and submit the contact details without any data, you'll notice there is no announcement made when the error message appears on the page.
+
+03:23.640 --> 03:29.740
+(Voiceover announcements begin  - Welcome to voiceover. Now in Codepen Tesco Bank a poor example of a form google chrome window. Link - 
+
+03:29.750 --> 03:36.360
+click here. Edit text. Blank edit text. Blank edit text. Blank. To get missing image descriptions open the context menu. Button.
+
+03:36.840 --> 03:43.080
+You are currently on a button inside of web content. To click this button, press control option space. To exit this web area,
+
+03:43.090 --> 03:51.110
+press control option shift up arrow. - Voiceover announcements end) This is a huge barrier for blind screen reader users who may not perceive that an error occurred on the page and
+
+03:51.110 --> 03:59.170
+fails WCAG 4.1.3 Status Messages. To fix this, appropriate ARIA attributes need to be added to
+
+03:59.170 --> 04:00.060
+the HTML.
+
+04:01.140 --> 04:09.180
+Finally, the color contrast of the red error text against the red background color of the error message itself is not high enough to ensure that people
+
+04:09.180 --> 04:12.060
+with lower perception of color can see the error message.
+
+04:12.920 --> 04:21.010
+This fails WCAG criterion 1.4.3 Contrast (minimum). And, brings us to Issue 7: Insufficient
+
+04:21.010 --> 04:22.560
+color contrast for text.
+
+04:23.640 --> 04:31.650
+The styling of the error message on the page needs to meet the 4.5:1 color contrast WCAG requirement for text.
+
+04:32.540 --> 04:39.080
+Using the Canvas Kit tokens error color, for example Cinnamon 500 on a white background, would be a better choice.
+
+04:40.140 --> 04:48.330
+The last two issues on the practice triage answer key are specific issues related to assistive technology and maybe difficult to identify manually for
+
+04:48.330 --> 04:56.560
+those unfamiliar with screen reader usage. Issue 8: Unable to locate region bypass blocks - is based on the structure of the DOM.
+
+04:57.230 --> 05:05.680
+For screen reader users who rely on these regions to navigate the webpage, it is critical that such semantic regions are present for consistent navigation
+
+05:05.680 --> 05:13.780
+across Workday products and services. This is also a failure of WCAG criterion 2.4.1 Bypass Blocks. 
+
+05:13.780 --> 05:21.790
+To fix this type of issue, the DOM should be written using main, h1, footer, and other semantic HTML elements.
+
+05:21.980 --> 05:28.300
+Not generic divs! Issue 9: Lack of association between labels and fields is also problematic.
+
+05:28.510 --> 05:36.640
+This webpage is not using any label for attributes and has no ARIA label attributes provided. It is essential to provide an HTML
+
+05:36.640 --> 05:43.490
+label tag with a "for" attribute for screen reader users to perceive what information to enter into fields.
+
+05:43.650 --> 05:48.730
+A lack of labels or association for labels is considered a failure of WCAG criterion
+
+05:48.730 --> 05:57.060
+3.3.2 Labels or Instructions. WHEW! That was a lot of information and took a lot of manual work to identify.
+
+05:57.140 --> 06:02.560
+Wouldn't it be great if there were automation tools to help you quickly identify some of these accessibility issues?
+
+06:03.040 --> 06:04.660
+Well, good news. There are!
+
+06:05.430 --> 06:13.370
+Now let's use the axe Expert automation tool to identify accessibility issues. I've already added the axe Expert extension to my Chrome browser.
+
+06:13.380 --> 06:16.050
+Open the extension tool. Then select analyze.
+
+06:16.930 --> 06:20.410
+You can see the issue count here. There are 11 issues identified.
+
+06:21.240 --> 06:26.670
+Depending on the testing scope you set on your automation tool, you may see a different number of issues.
+
+06:27.140 --> 06:35.200
+But on this full page scan you'll get the same number of issues. The key thing here is to look at the summary of critical and major issues and address
+
+06:35.200 --> 06:43.270
+them. Using the automated tool can save you valuable time and identify common problems. Some WCAG issues and recommendations for fixes
+
+06:43.270 --> 06:50.160
+are also built into the tool. It is important to remember though that automation can't find every kind of accessibility issue.
+
+06:50.740 --> 06:58.800
+It is well known that automation tools at best find 25-50% of possible accessibility issues with possible false
+
+06:58.800 --> 06:59.610
+positives.
+
+07:00.520 --> 07:09.020
+The accessibility of products and services is based on the human ability of assistive technology users to use and access experiences - something
+
+07:09.020 --> 07:11.930
+which automation can only provide limited information on.
+
+07:13.140 --> 07:18.900
+Make it a habit to inspect webpages to find and address accessibility issues. Together,
+
+07:18.900 --> 07:23.950
+your efforts will help ensure Workday products are accessible for all. Thanks for watching!
